@@ -1,1 +1,1 @@
-the readee file for print project
+the readme file for print project
