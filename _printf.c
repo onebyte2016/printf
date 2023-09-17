@@ -1,6 +1,33 @@
 #include "main.h"
+
 /**
- * _printf - function for printing output
+ * write_char - Helper function to write a character
+ * @c: argument passed
+ * Return: Always 0
+ */
+static int write_char(char c)
+{
+	return (write(1, &c, 1));
+}
+/**
+ * write_string - Helper function to write a string
+ * @str: argument passed
+ * Return: Always
+ */
+static int write_string(char *str)
+{
+	int len = 0;
+
+	while (*str)
+	{
+		write_char(*str);
+		str++;
+		len++;
+	}
+	return (len);
+}
+/**
+ * _printf - Custom printf function
  * @format: argument passed
  * Return: Always 0
  */
@@ -16,8 +43,7 @@ int _printf(const char *format, ...)
 	{
 		if (*format != '%')
 		{
-			write(1, format, 1);
-			output_print++;
+			output_print += write_char(*format);
 		}
 		else
 		{
@@ -26,26 +52,19 @@ int _printf(const char *format, ...)
 				break;
 			if (*format == '%')
 			{
-				write(1, format, 1);
-				output_print++;
+				output_print += write_char('%');
 			}
 			else if (*format == 'c')
 			{
 				char c = va_arg(args_list, int);
 
-				write(1, &c, 1);
-				output_print++;
-
+				output_print += write_char(c);
 			}
 			else if (*format == 's')
 			{
-				char *str = va_arg(args_list, char*);
-				int str_len = 0;
+				char *str = va_arg(args_list, char *);
 
-				while (str[str_len] != '\0')
-					str_len++;
-				write(1, str, str_len);
-				output_print = str_len;
+				output_print += write_string(str);
 			}
 		}
 		format++;
