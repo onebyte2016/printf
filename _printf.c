@@ -1,66 +1,118 @@
 #include "main.h"
-
-void print_buffer(char buffer[], int *buff_ind);
+#include <unistd.h>
+#include <stdarg.h>
 
 /**
- * _printf - Printf function
- * @format: format.
- * Return: Printed chars.
+ * _putchar - Writes a character to stdout
+ * @c: parameter
+ * Return: 0
+ */
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
+}
+
+/**
+ * print_char - Prints a character
+ * @args: parameter
+ * Return: Always 0
+ */
+int print_char(va_list args)
+{
+	return (_putchar(va_arg(args, int)));
+}
+
+/**
+ * print_string - Prints a string
+ * @args: arges
+ * Return: Always 0
+ */
+int print_string(va_list args)
+{
+	char *str = va_arg(args, char *);
+	int count = 0;
+
+	if (str == NULL)
+		str = "(null)";
+
+	while (*str)
+	{
+		count += _putchar(*str);
+		str++;
+	}
+
+	return (count);
+}
+
+/**
+ * print_percent - Prints a percent symbol
+ * @args: parameter
+ * Return: Always 0
+ */
+int print_percent(__attribute__((unused)) va_list args)
+{
+	return (_putchar('%'));
+}
+
+/**
+ * _printf - Custom printf function
+ * @format: parameter
+ * Return: Always 0
  */
 int _printf(const char *format, ...)
 {
-	int k, printed = 0, output_chars = 0;
-	int flags, width, precision, size, buff_ind = 0;
-	va_list list;
-	char buffer[BUFF_SIZE];
+	int i, printed_chars = 0;
+	va_list args;
+	char c;
 
 	if (format == NULL)
 		return (-1);
 
-	va_start(list, format);
+	va_start(args, format);
 
-	for (k = 0; format && format[k] != '\0'; k++)
+	for (i = 0; format[i] != '\0'; i++)
 	{
-		if (format[k] != '%')
+		c = format[i];
+		if (c != '%' || format[i + 1] == '\0')
 		{
-			buffer[buff_ind++] = format[k];
-			if (buff_ind == BUFF_SIZE)
-				print_buffer(buffer, &buff_ind);
-			/* write(1, &format[i], 1);*/
-			output_chars++;
+			printed_chars += _putchar(c);
 		}
 		else
 		{
-			print_buffer(buffer, &buff_ind);
-			flags = get_flags(format, &k);
-			width = get_width(format, &k, list);
-			precision = get_precision(format, &k, list);
-			size = get_size(format, &k);
-			++k;
-			printed = handle_print(format, &k, list, buffer,
-					flags, width, precision, size);
-			if (printed == -1)
-				return (-1);
-			output_chars += printed;
+			i++;
+			if (format[i] == '%')
+			{
+				printed_chars += _putchar('%');
+			}
+			else
+			{
+				int (*print_func)(va_list) = NULL;
+
+				switch (format[i])
+				{
+					case 'c':
+						print_func = print_char;
+						break;
+					case 's':
+						print_func = print_string;
+						break;
+					case '%':
+						print_func = print_percent;
+						break;
+				}
+				if (print_func != NULL)
+				{
+					printed_chars += print_func(args);
+				}
+				else
+				{
+					printed_chars += _putchar('%');
+					printed_chars += _putchar(format[i]);
+				}
+			}
 		}
 	}
 
-	print_buffer(buffer, &buff_ind);
-
-	va_end(list);
-
-	return (output_chars);
-}
-
-/**
- * print_buffer - Prints the contents of the buffer if it exist
- * @buffer: Array of chars
- * @buff_ind: Index at which to add next char, represents the length.
- */
-void print_buffer(char buffer[], int *buff_ind)
-{
-	if (*buff_ind > 0)
-		write(1, &buffer[0], *buff_ind);
-
-	*buff_ind = 0;
+	va_end(args);
+	return (printed_chars);
 }
