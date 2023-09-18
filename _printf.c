@@ -1,74 +1,77 @@
 #include "main.h"
 
 /**
- * write_char - Helper function to write a character
+ * print_char - Helper function to write a character
  * @c: argument passed
  * Return: Always 0
  */
-static int write_char(char c)
+int print_char(char c)
 {
-	return (write(1, &c, 1));
+	putchar(c);
+	return (1);
 }
+
 /**
- * write_string - Helper function to write a string
+ * print_str - Helper function to write a character
  * @str: argument passed
- * Return: Always
+ * Return: Always 0
  */
-static int write_string(char *str)
+int print_str(const char *str)
 {
-	int len = 0;
+	int chars_printed = 0;
 
 	while (*str)
 	{
-		write_char(*str);
+		chars_printed += print_char(*str);
 		str++;
-		len++;
 	}
-	return (len);
+	return (chars_printed);
 }
+
 /**
  * _printf - Custom printf function
- * @format: argument passed
- * Return: Always 0
+ * @format: The format string
+ * Return: Number of characters printed
  */
+
 int _printf(const char *format, ...)
 {
-	int output_print = 0;
-	va_list args_list;
+	va_list args;
 
-	if (format == NULL)
-		return (-1);
-	va_start(args_list, format);
-	while (*format)
+	va_start(args, format);
+
+	int chars_printed = 0;
+	int i;
+
+	for (i = 0; format[i] != '\0'; i++)
 	{
-		if (*format != '%')
+		if (format[i] == '%')
 		{
-			output_print += write_char(*format);
+			i++;
+			char specifier = format[i];
+
+			switch (specifier)
+			{
+				case 'c':
+					chars_printed += print_char(va_arg(args, int));
+					break;
+				case 's':
+					chars_printed += print_str(va_arg(args, const char *));
+					break;
+				case '%':
+					chars_printed += print_char('%');
+					break;
+				default:
+					chars_printed += print_char('%');
+					chars_printed += print_char(specifier);
+			}
 		}
 		else
 		{
-			format++;
-			if (*format == '\0')
-				break;
-			if (*format == '%')
-			{
-				output_print += write_char('%');
-			}
-			else if (*format == 'c')
-			{
-				char c = va_arg(args_list, int);
-
-				output_print += write_char(c);
-			}
-			else if (*format == 's')
-			{
-				char *str = va_arg(args_list, char *);
-
-				output_print += write_string(str);
-			}
+			chars_printed += print_char(format[i]);
 		}
-		format++;
 	}
-	va_end(args_list);
-	return (output_print);
+
+	va_end(args);
+	return (chars_printed);
 }
