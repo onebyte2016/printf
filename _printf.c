@@ -3,116 +3,75 @@
 #include <stdarg.h>
 
 /**
- * _putchar - Writes a character to stdout
- * @c: parameter
- * Return: 0
+ * write_char - Helper function to write a character
+ * @c: argument passed
+ * Return: Always 0
  */
-int _putchar(char c)
+static int write_char(char c)
 {
 	return (write(1, &c, 1));
 }
-
 /**
- * print_char - Prints a character
- * @args: parameter
- * Return: Always 0
+ * write_string - Helper function to write a string
+ * @str: argument passed
+ * Return: Always
  */
-int print_char(va_list args)
+static int write_string(char *str)
 {
-	return (_putchar(va_arg(args, int)));
-}
-
-/**
- * print_string - Prints a string
- * @args: arges
- * Return: Always 0
- */
-int print_string(va_list args)
-{
-	char *str = va_arg(args, char *);
-	int count = 0;
-
-	if (str == NULL)
-		str = "(null)";
+	int len = 0;
 
 	while (*str)
 	{
-		count += _putchar(*str);
+		write_char(*str);
 		str++;
+		len++;
 	}
-
-	return (count);
+	return (len);
 }
-
-/**
- * print_percent - Prints a percent symbol
- * @args: parameter
- * Return: Always 0
- */
-int print_percent(__attribute__((unused)) va_list args)
-{
-	return (_putchar('%'));
-}
-
 /**
  * _printf - Custom printf function
- * @format: parameter
+ * @format: argument passed
  * Return: Always 0
  */
 int _printf(const char *format, ...)
 {
-	int i, printed_chars = 0;
-	va_list args;
-	char c;
+	int output_print = 0;
+	va_list args_list;
+
 
 	if (format == NULL)
 		return (-1);
-
-	va_start(args, format);
-
-	for (i = 0; format[i] != '\0'; i++)
+	va_start(args_list, format);
+	while (*format)
 	{
-		c = format[i];
-		if (c != '%' || format[i + 1] == '\0')
+		if (*format != '%')
 		{
-			printed_chars += _putchar(c);
+			output_print += write_char(*format);
 		}
 		else
 		{
-			i++;
-			if (format[i] == '%')
+			format++;
+			if (*format == '\0')
+				break;
+			if (*format == '%')
 			{
-				printed_chars += _putchar('%');
+				output_print += write_char('%');
 			}
-			else
+			else if (*format == 'c')
 			{
-				int (*print_func)(va_list) = NULL;
+				char c = va_arg(args_list, int);
 
-				switch (format[i])
-				{
-					case 'c':
-						print_func = print_char;
-						break;
-					case 's':
-						print_func = print_string;
-						break;
-					case '%':
-						print_func = print_percent;
-						break;
-				}
-				if (print_func != NULL)
-				{
-					printed_chars += print_func(args);
-				}
-				else
-				{
-					printed_chars += _putchar('%');
-					printed_chars += _putchar(format[i]);
-				}
+				output_print += write_char(c);
+			}
+			else if (*format == 's')
+			{
+				char *str = va_arg(args_list, char *);
+
+				output_print += write_string(str);
 			}
 		}
+		format++;
 	}
-
-	va_end(args);
-	return (printed_chars);
+	va_end(args_list);
+	return (output_print);
 }
