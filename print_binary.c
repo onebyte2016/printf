@@ -15,7 +15,7 @@ void print_binary_helper(unsigned int number, void *count)
 
 /**
 * print_binary - prints the binary representation of a number
-* @args: the number to print
+* @list: the number to print
 * @format: format struct
 * @count: pointer to count of characters printed
 */

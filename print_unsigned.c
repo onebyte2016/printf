@@ -15,7 +15,7 @@ void print_unsigned_helper(unsigned int number, void *count)
 
 /**
  * print_unsigned - prints an unsigned integer
- * @args: va_list of arguments
+ * @list: va_list of arguments
  * @format: format struct
  * @count: pointer to count of characters printed
 */

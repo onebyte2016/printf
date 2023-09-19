@@ -2,7 +2,7 @@
 
 /**
  * print_rot13 - prints a string in rot13
- * @args: va_list of arguments
+ * @list: va_list of arguments
  * @format: format struct
  * @count: pointer to count of characters printed
  */
@@ -14,7 +14,7 @@ void print_rot13(va_list list, format_t format, void *count)
 	UNUSED(format);
 
 	if (str == NULL)
-		return ;
+		return;
 
 	while (str[x])
 	{

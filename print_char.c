@@ -2,7 +2,7 @@
 
 /**
 * print_char - prints a character
-* @args: the character to print
+* @list: the character to print
 * @format: format struct
 * @count: pointer to count of characters printed
 */

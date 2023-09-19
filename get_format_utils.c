@@ -10,7 +10,7 @@ char *get_flags(const char **s)
 {
 	char flags[] = {'-', '+', ' ', '#', '0'};
 	int x, j = 0;
-	char *flag = malloc(sizeof *flag * 6);
+	char *flag = malloc(sizeof(*flag) * 6);
 
 	if (flag == NULL)
 		return (NULL);

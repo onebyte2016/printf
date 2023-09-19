@@ -3,7 +3,7 @@
 
 /**
  * print_reverse - prints a string in reverse
- * @args: the string to print
+ * @list: the string to print
  * @format: format struct
  * @count: pointer to count of characters printed
  * Return: void
@@ -16,7 +16,7 @@ void print_reverse(va_list list, format_t format, void *count)
 	UNUSED(format);
 
 	if (str == NULL)
-		return ;
+		return;
 
 	while (str[x])
 		x++;

@@ -26,7 +26,7 @@ void print_integer_helper(int number, void *count)
 
 /**
  * print_integer - prints an integer
- * @args: va_list of arguments
+ * @list: va_list of arguments
  * @format: format struct
  * @count: pointer to count of characters printed
  */

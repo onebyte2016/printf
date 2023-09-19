@@ -2,7 +2,7 @@
 
 /**
  * print_string_non_printable - prints a string
- * @args: the string to print
+ * @list: the string to print
  * @format: format struct
  * @count: pointer to count of characters printed
  * Return: void

@@ -15,7 +15,7 @@ void print_octal_helper(unsigned int number, void *count)
 
 /**
 * print_octal - prints the octal representation of a number
-* @args: va_list of arguments
+* @list: va_list of arguments
 * @format: format struct
 * @count: pointer to count of characters printed
 */

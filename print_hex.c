@@ -16,7 +16,7 @@ void print_hex_helper(unsigned long int number, char *base, void *count)
 
 /**
  * print_hex - prints the hex representation of a number
- * @args: va_list of arguments
+ * @list: va_list of arguments
  * @format: format struct
  * @count: pointer to count of characters printed
  */

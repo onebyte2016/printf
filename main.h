@@ -27,8 +27,14 @@
 	}
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
+#define ABS(x) ((x) < 0 ? -(x) : (x))
+#define ABS_SIGNED(x) ((x) < 0 ? -(x) : (x))
+
+
+#define ABS_UNSIGNED(x) (x)
 
 #define UNUSED(x) (void)(x)
+
 
 /** --- STRUCTURES --- */
 
@@ -73,6 +79,7 @@ void print_reverse(va_list, format_t, void *);
 void print_rot13(va_list, format_t, void *);
 void print_address(va_list, format_t, void *);
 void print_string_non_printable(va_list, format_t, void *);
+void print_octal(va_list list, format_t format, void *count);
 
 
 /* --- Get format functions --- */

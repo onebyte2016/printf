@@ -3,7 +3,7 @@
 
 /**
 * print_address - prints the address of a variable
-* @args: the variable to print
+* @list: the variable to print
 * @format: format struct
 * @count: pointer to count of characters printed
 */

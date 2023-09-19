@@ -2,7 +2,7 @@
 
 /**
  * print_percent - prints a percent sign
- * @args: va_list of arguments (unused)
+ * @list: va_list of arguments (unused)
  * @format: format struct
  * @count: pointer to count of characters printed
 */
