@@ -41,7 +41,7 @@ int _printf(const char *format, ...)
 	format_t f = {0, -1, -1, -1, -1};
 	va_list list;
 
-	if (!format)
+	if (format == NULL)
 		return (-1);
 
 	va_start(list, format);
