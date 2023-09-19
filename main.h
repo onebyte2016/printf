@@ -1,18 +1,16 @@
 #ifndef MAIN_H
 #define MAIN_H
-<<<<<<< HEAD
 
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 int _putchar(char c);
 int _printf(const char *format, ...);
+int print_character(char c);
+int print_string(const char *str);
+int print_percent(void);
 
-
-=======
-#include <stdarg.h>
-#include <stdio.h>
-#include <unistd.h>
 
 #define UNUSED(x) (void)(x)
 #define BUFF_SIZE 1024

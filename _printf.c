@@ -2,27 +2,13 @@
 #include <stdarg.h>
 #include "main.h"
 
-int _printf(const char *format, ...);
-int print_character(char c);
-int print_string(const char *str);
-int print_percent(void);
-
-/**
- * main - entry point
- * Return: zero for success
- */
-
-int main(void)
-{
-	_printf("Hello, %c World! %s %%%c\n", 'C', "This is a test", 'R');
-	return (0);
-}
 
 /**
  * _printf - Custom printf function
  * @format: argument passed
  * Return: Always 0
  */
+
 int _printf(const char *format, ...)
 {
 	int output_print = 0;
