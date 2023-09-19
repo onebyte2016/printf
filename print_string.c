@@ -30,20 +30,7 @@ void print_string(va_list list, format_t format, void *count)
 	UNUSED(format);
 
 	if (str == NULL)
-	{
-		fprintf(stdout, "(null)");
-		*(int *)count += 6;
-	}
-	else
-	{
-		int written = write(STDOUT_FILENO, str, _strlen(str));
+		str = "(null)";
 
-		if (written == -1)
-		{
-		}
-		else
-		{
-			*(int *)count += written;
-		}
-	}
+	*(int *)count += (int) write(STDOUT_FILENO, str, _strlen(str));
 }
