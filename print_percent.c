@@ -6,8 +6,7 @@
  * @format: format struct
  * @count: pointer to count of characters printed
 */
-void print_percent(va_list list,
-				   format_t format, void *count)
+void print_percent(va_list list, format_t format, void *count)
 {
 	/* char *percent = "%"; */
 
