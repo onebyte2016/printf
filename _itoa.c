@@ -48,7 +48,9 @@ char *reverse_string(char *str)
  */
 char *_itoa(ssize_t value, char *base)
 {
-	ssize_t quotient = ABS(value), x = 0;
+	/*ssize_t quotient = ABS(value), x = 0;*/
+	ssize_t quotient = value, x = 0;
+
 	int base_len = _strlen(base);
 	char *result = malloc(get_number_length(value) + 1);
 
@@ -75,7 +77,9 @@ char *_itoa(ssize_t value, char *base)
  */
 char *_utoa(size_t value, char *base)
 {
-	ssize_t quotient = ABS(value), x = 0;
+	/*ssize_t quotient = ABS(value), x = 0;*/
+	size_t quotient = value, x = 0;
+
 	int base_len = _strlen(base);
 	char *result = malloc(get_number_length(value) + 1);
 
