@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
  * _strlen - returns the length of a string
@@ -29,7 +30,20 @@ void print_string(va_list list, format_t format, void *count)
 	UNUSED(format);
 
 	if (str == NULL)
-		str = "(null)";
+	{
+		fprintf(stdout, "(null)");
+		*(int *)count += 6;
+	}
+	else
+	{
+		int written = write(STDOUT_FILENO, str, _strlen(str));
 
-	*(int *)count += (int) write(STDOUT_FILENO, str, _strlen(str));
+		if (written == -1)
+		{
+		}
+		else
+		{
+			*(int *)count += written;
+		}
+	}
 }
