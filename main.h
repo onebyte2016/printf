@@ -46,6 +46,15 @@
  * @length: length
  * @specifier: specifier
  */
+/*
+typedef struct format_s {
+    int width;
+    int precision;
+    int length;
+    int flags;
+    char specifier;
+} format_t;
+*/
 typedef struct format_s
 {
 	char *flags;
@@ -55,18 +64,40 @@ typedef struct format_s
 	char specifier;
 } format_t;
 
+
 /**
  * struct format_specifier_s - format specifier
  * @specifier: specifier
  * @function: function to print the specifier
  */
+/*
+typedef struct {
+    const char *specifier;
+    void (*function)(va_list, format_t, int *);
+} format_specifier;
+*/
 typedef struct format_specifier_s
 {
 	char *specifier;
 	void (*function)(va_list, format_t, void *);
 } format_specifier;
 
+
 /* --- FUNCTION PROTOTYPES --- */
+void print_char(va_list list, format_t f, void *count);
+void print_string(va_list list, format_t f, void *count);
+void print_percent(va_list list, format_t f,void *count);
+void print_integer(va_list list, format_t f, void *count);
+void print_binary(va_list list, format_t f,void *count);
+void print_octal(va_list list, format_t f, void *count);
+void print_hex(va_list list, format_t f, void *count);
+void print_unsigned(va_list list, format_t f, void *count);
+void print_address(va_list list, format_t f, void *count);
+void print_reverse(va_list list, format_t f, void *count);
+void print_rot13(va_list list, format_t f, void *count);
+void print_string_non_printable(va_list list, format_t f, void *count);
+
+/*
 void print_char(va_list, format_t, void *);
 void print_string(va_list, format_t, void *);
 void print_percent(va_list, format_t, void *);
@@ -80,7 +111,7 @@ void print_rot13(va_list, format_t, void *);
 void print_address(va_list, format_t, void *);
 void print_string_non_printable(va_list, format_t, void *);
 void print_octal(va_list list, format_t format, void *count);
-
+*/
 
 /* --- Get format functions --- */
 int in_flags(char c, const char *flags);
@@ -97,7 +128,8 @@ void justifier(char *, format_t, void *);
 
 int _printf(const char *format, ...);
 void _puts(char *, void *);
-void _putchar(char, void *);
+/*void _putchar(char, void *);*/
+void _putchar(char c, int *count);
 
 int _strlen(const char *);
 int _atoi(const char *);

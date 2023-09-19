@@ -37,9 +37,10 @@ static format_specifier format_specifiers[] = {
  */
 int _printf(const char *format, ...)
 {
-	int count = 0, x;
+	int count = 0;
 	format_t f = {0, -1, -1, -1, -1};
 	va_list list;
+	int x;
 
 	if (format == NULL)
 		return (-1);
