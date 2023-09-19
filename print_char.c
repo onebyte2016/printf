@@ -12,5 +12,5 @@ void print_char(va_list list, format_t format, void *count)
 
 	UNUSED(format);
 
-	_putchar(c,(int *)count);
+	_putchar(c,count);
 }
