@@ -23,9 +23,10 @@ void _memset(char *s, char b, unsigned int n)
  * @c: character to print
  * @count: number of characters printed
  */
-
 void _putchar(char c, void *count)
 {
-	write(STDOUT_FILENO, &c, 1);
-	*(int *)count += 1;
+    if (count != NULL) {
+        write(STDOUT_FILENO, &c, 1);
+        *(int *)count += 1;
+    }
 }
