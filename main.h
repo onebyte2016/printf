@@ -1,6 +1,7 @@
 #ifndef PRINTF_MAIN_H
 #define PRINTF_MAIN_H
-
+#include <stdlib.h>
+#include <ctype.h>
 #include <stdarg.h>
 #include <unistd.h>
 #include <limits.h>
