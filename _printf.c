@@ -1,127 +1,71 @@
-#include <stdio.h>
-#include <stdarg.h>
 #include "main.h"
-
+#include <stdlib.h>
+#include <ctype.h>
 
 /**
- * _printf - Custom printf function
- * @format: argument passed
- * Return: Always 0
+ * is_alpha - checks if a character is an alphabet
+ * @c: the character to check
+ * Return: 1 if the character is an alphabet, 0 otherwise
  */
+int is_alpha(char c)
+{
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+}
 
+static format_specifier format_specifiers[] = {
+	{"c", print_char},
+	{"s", print_string},
+	{"%", print_percent},
+	{"d", print_integer},
+	{"i", print_integer},
+	{"b", print_binary},
+	{"o", print_octal},
+	{"x", print_hex},
+	{"X", print_hex},
+	{"u", print_unsigned},
+	{"p", print_address},
+	{"r", print_reverse},
+	{"R", print_rot13},
+	{"S", print_string_non_printable},
+	{NULL, NULL}
+};
+
+/**
+ * _printf - produces output according to a format
+ * @format: character string
+ * Return: number of characters printed
+ */
 int _printf(const char *format, ...)
 {
-	int output_print = 0;
-	va_list args_list;
+	int count = 0, x;
+	format_t f = {0, -1, -1, -1, -1};
+	va_list list;
 
-
-	if (format == NULL)
+	if (!format)
 		return (-1);
-	va_start(args_list, format);
 
+	va_start(list, format);
 	while (*format)
 	{
-		if (*format != '%')
-		{
-			printed_chars += print_character(*format);
-
-			output_print += write_char(*format);
-
-		}
-		else
+		if (*format == '%')
 		{
 			format++;
-			if (*format == '\0')
-				break;
+			f = get_format(&format);
+			if (f.flags == NULL)
+				return (-1);
 
-			if (*format == 'c')
-			{
-				char c = va_arg(args, int);
-
-				printed_chars += print_character(c);
-			}
-			else if (*format == 's')
-			{
-				const char *str = va_arg(args, const char *);
-
-				printed_chars += print_string(str);
-			}
-			else if (*format == '%')
-			{
-				printed_chars += print_percent();
-
-			if (*format == '%')
-			{
-				output_print += write_char('%');
-			}
-			else if (*format == 'c')
-			{
-				char c = va_arg(args_list, int);
-
-				output_print += write_char(c);
-			}
-			else if (*format == 's')
-			{
-				char *str = va_arg(args_list, char *);
-
-				output_print += write_string(str);
-
-			}
+			for (x = 0; format_specifiers[x].specifier; ++x)
+				if (f.specifier == *format_specifiers[x].specifier)
+				{
+					format_specifiers[x].function(list, f, &count);
+					format++;
+					break;
+				}
+			free(f.flags);
 		}
-		format++;
+		else
+			_putchar(*format++, &count);
 	}
-
-
-
-	va_end(args);
-	return (printed_chars);
+	va_end(list);
+	return (count);
 }
-
-/**
- * print_character - prints a character
- * @c: character argument
- * Return: 1
- */
-
-int print_character(char c)
-{
-	_putchar(c);
-	return (1);
-}
-
-/**
- * print_string - prints a string
- * @str: string
- * Return: success
- */
-
-int print_string(const char *str)
-{
-	int printed_chars = 0;
-
-	while (*str)
-	{
-		_putchar(*str);
-		str++;
-		printed_chars++;
-	}
-	return (printed_chars);
-}
-
-/**
- * print_percent - prints a percent
- * Return: 1
- */
-
-int print_percent(void)
-{
-	_putchar('%');
-	return (1);
-}
-
-
-
-	va_end(args_list);
-	return (output_print);
-}
-
