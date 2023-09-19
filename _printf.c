@@ -19,34 +19,35 @@ int main(void)
 }
 
 /**
- * _printf - Custom printf function.
- * @format: Format string.
- * Return: Number of characters printed.
+ * _printf - Custom printf function
+ * @format: argument passed
+ * Return: Always 0
  */
-
-
 int _printf(const char *format, ...)
 {
+	int output_print = 0;
+	va_list args_list;
+
+
 	if (format == NULL)
 		return (-1);
-
-	va_list args;
-
-	va_start(args, format);
-
-	int printed_chars = 0;
+	va_start(args_list, format);
 
 	while (*format)
 	{
 		if (*format != '%')
 		{
 			printed_chars += print_character(*format);
+
+			output_print += write_char(*format);
+
 		}
 		else
 		{
 			format++;
 			if (*format == '\0')
 				break;
+
 			if (*format == 'c')
 			{
 				char c = va_arg(args, int);
@@ -62,10 +63,28 @@ int _printf(const char *format, ...)
 			else if (*format == '%')
 			{
 				printed_chars += print_percent();
+
+			if (*format == '%')
+			{
+				output_print += write_char('%');
+			}
+			else if (*format == 'c')
+			{
+				char c = va_arg(args_list, int);
+
+				output_print += write_char(c);
+			}
+			else if (*format == 's')
+			{
+				char *str = va_arg(args_list, char *);
+
+				output_print += write_string(str);
+
 			}
 		}
 		format++;
 	}
+
 
 
 	va_end(args);
@@ -114,4 +133,9 @@ int print_percent(void)
 	return (1);
 }
 
+
+
+	va_end(args_list);
+	return (output_print);
+}
 
