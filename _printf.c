@@ -55,7 +55,7 @@ int _printf(const char *format, ...)
 			if (f.flags == NULL)
 				return (-1);
 
-			for (x = 0; format_specifiers[i].specifier; ++i)
+			for (i = 0; format_specifiers[i].specifier; ++i)
 				if (f.specifier == *format_specifiers[i].specifier)
 				{
 					format_specifiers[i].function(list, f, &count);
