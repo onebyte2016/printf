@@ -27,7 +27,7 @@ static format_specifier format_specifiers[] = {
 	{"r", print_reverse},
 	{"R", print_rot13},
 	{"S", print_string_non_printable},
-	{'\0', NULL}
+	{NULL, NULL}
 };
 
 /**
@@ -55,10 +55,10 @@ int _printf(const char *format, ...)
 			if (f.flags == NULL)
 				return (-1);
 
-			for (x = 0; format_specifiers[x].specifier; ++x)
-				if (f.specifier == *format_specifiers[x].specifier)
+			for (x = 0; format_specifiers[x] . specifier; ++x)
+				if (f.specifier == *format_specifiers[x] . specifier)
 				{
-					format_specifiers[x].function(list, f, &count);
+					format_specifiers[x] . function(list, f, &count);
 					format++;
 					break;
 				}
