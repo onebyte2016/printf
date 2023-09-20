@@ -43,7 +43,7 @@ int _printf(const char *format, ...)
 	va_list list;
 	int x;
 
-	if (format == NULL)
+	if (!format)
 		return (-1);
 
 	va_start(list, format);
