@@ -55,10 +55,10 @@ int _printf(const char *format, ...)
 			if (f.flags == NULL)
 				return (-1);
 
-			for (x = 0; format_specifiers[i] . specifier; ++i)
-				if (f . specifier == *format_specifiers[i] . specifier)
+			for (x = 0; format_specifiers[i].specifier; ++i)
+				if (f.specifier == *format_specifiers[i].specifier)
 				{
-					format_specifiers[i] . function(list, f, &count);
+					format_specifiers[i].function(list, f, &count);
 					format++;
 					break;
 				}
