@@ -40,7 +40,7 @@ int _printf(const char *format, ...)
 	int count = 0;
 	format_t f = {0, -1, -1, -1, -1};
 	va_list list;
-	int x;
+	int i;
 
 	if (!format)
 		return (-1);
@@ -55,10 +55,10 @@ int _printf(const char *format, ...)
 			if (f.flags == NULL)
 				return (-1);
 
-			for (x = 0; format_specifiers[x] . specifier; ++x)
-				if (f.specifier == *format_specifiers[x] . specifier)
+			for (x = 0; format_specifiers[i] . specifier; ++i)
+				if (f . specifier == *format_specifiers[i] . specifier)
 				{
-					format_specifiers[x] . function(list, f, &count);
+					format_specifiers[i] . function(list, f, &count);
 					format++;
 					break;
 				}
