@@ -111,7 +111,7 @@ void print_rot13(va_list, format_t, void *);
 void print_address(va_list, format_t, void *);
 void print_string_non_printable(va_list, format_t, void *);
 void print_octal(va_list list, format_t format, void *count);
-void int custom_printf(const char *format, ...);
+void custom_printf(const char *format, ...);
 
 
 /* --- Get format functions --- */
