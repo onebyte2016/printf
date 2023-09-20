@@ -8,7 +8,6 @@
 */
 void print_percent(va_list list, format_t format, void *count)
 {
-	/* char *percent = "%"; */
 
 	UNUSED(list);
 	UNUSED(format);
