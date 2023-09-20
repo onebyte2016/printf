@@ -27,6 +27,7 @@ static format_specifier format_specifiers[] = {
 	{"r", print_reverse},
 	{"R", print_rot13},
 	{"S", print_string_non_printable},
+	{"%r", print_percentR},
 	{NULL, NULL}
 };
 
