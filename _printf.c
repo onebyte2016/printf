@@ -43,7 +43,7 @@ int _printf(const char *format, ...)
 	int i;
 
 	if (!format)
-		return (NULL);
+		return (-1);
 
 	va_start(list, format);
 	while (*format)
@@ -53,7 +53,7 @@ int _printf(const char *format, ...)
 			format++;
 			f = get_format(&format);
 			if (f.flags == NULL)
-				return (NULL);
+				return (-1);
 
 			for (i = 0; format_specifiers[i].specifier; ++i)
 				if (f.specifier == *format_specifiers[i].specifier)
