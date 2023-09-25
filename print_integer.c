@@ -13,7 +13,6 @@ void print_integer_helper(int number, void *count)
 	if (number < 0)
 	{
 		_putchar('-', count);
-		_putchar(' ');
 		n = -number;
 	}
 	if (n < 10)
