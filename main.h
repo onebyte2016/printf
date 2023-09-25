@@ -16,16 +16,16 @@
 #define PRINT_VAR_NAME(var) printf(#var " = %d\n", var)
 
 #define CHECK_RIGHT_JUSTIFICATION(value, format, count, justifier_func) \
-	{ \
-		if (!in_flags('-', format.flags)) \
-			justifier_func(value, format, count); \
-	}
+{ \
+	if (!in_flags('-', format.flags)) \
+	justifier_func(value, format, count); \
+}
 
 #define CHECK_LEFT_JUSTIFICATION(value, format, count, justifier_func) \
-	{ \
-		if (in_flags('-', format.flags)) \
-			justifier_func(value, format, count); \
-	}
+{ \
+	if (in_flags('-', format.flags)) \
+	justifier_func(value, format, count); \
+}
 
 #define ABS(x) ((x) < 0 ? -(x) : (x))
 #define ABS_SIGNED(x) ((x) < 0 ? -(x) : (x))
@@ -46,15 +46,7 @@
  * @length: length
  * @specifier: specifier
  */
-/*
-typedef struct format_s {
-    int width;
-    int precision;
-    int length;
-    int flags;
-    char specifier;
-} format_t;
-*/
+
 typedef struct format_s
 {
 	char *flags;
@@ -70,12 +62,6 @@ typedef struct format_s
  * @specifier: specifier
  * @function: function to print the specifier
  */
-/*
-typedef struct {
-    const char *specifier;
-    void (*function)(va_list, format_t, int *);
-} format_specifier;
-*/
 typedef struct format_specifier_s
 {
 	char *specifier;
@@ -83,20 +69,7 @@ typedef struct format_specifier_s
 } format_specifier;
 
 
-/* --- FUNCTION PROTOTYPES --- */
-/*void print_char(va_list list, format_t f, void *count);
-void print_string(va_list list, format_t f, void *count);
-void print_percent(va_list list, format_t f,void *count);
-void print_integer(va_list list, format_t f, void *count);
-void print_binary(va_list list, format_t f,void *count);
-void print_octal(va_list list, format_t f, void *count);
-void print_hex(va_list list, format_t f, void *count);
-void print_unsigned(va_list list, format_t f, void *count);
-void print_address(va_list list, format_t f, void *count);
-void print_reverse(va_list list, format_t f, void *count);
-void print_rot13(va_list list, format_t f, void *count);
-void print_string_non_printable(va_list list, format_t f, void *count);*/
-
+/* ---handle functions --------*/
 
 void print_char(va_list, format_t, void *);
 void print_string(va_list, format_t, void *);
