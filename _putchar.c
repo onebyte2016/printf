@@ -25,8 +25,9 @@ void _memset(char *s, char b, unsigned int n)
  */
 void _putchar(char c, void *count)
 {
-    if (count != NULL) {
-        write(STDOUT_FILENO, &c, 1);
-        *(int *)count += 1;
-    }
+	if (count != NULL)
+	{
+		write(STDOUT_FILENO, &c, 1);
+		*(int *)count += 1;
+	}
 }
