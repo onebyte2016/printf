@@ -16,7 +16,7 @@ void print_integer_helper(int number, void *count)
 		n = -number;
 	}
 	if (n < 10)
-		_putchar(n +  '0', count);
+		_putchar(n + '0', count);
 	else
 	{
 		print_integer_helper(n / 10, count);
