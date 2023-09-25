@@ -12,5 +12,5 @@ void print_percent(va_list list, format_t format, void *count)
 	UNUSED(list);
 	UNUSED(format);
 
-	_putchar('%%', count);
+	_putchar('%', count);
 }
